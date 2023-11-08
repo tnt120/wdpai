@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application</title>
+    <title>Bookify</title>
 </head>
 <body>
-    <p>This is my html</p>
+    <p>Bookify application</p>
 </body>
 </html>
 
