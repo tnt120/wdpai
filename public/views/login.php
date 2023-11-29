@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/css/login.css">
     <title>Bookify</title>
 </head>
+
 <body>
     <nav>
         <div class="nav-logo">
@@ -29,7 +31,16 @@
         <div class="logo">
             <img src="/public/img/logo-mainpage.svg" alt="logo">
         </div>
-        <form>
+        <form action="login" method="POST" class='login'>
+            <div class="message">
+                <?php
+                if (isset($messages)) {
+                    foreach ($messages as $message) {
+                        echo $message;
+                    }
+                }
+                ?>
+            </div>
             <input type="text" name="login" placeholder="Login">
             <input type="password" name="password" placeholder="Password">
 
@@ -41,4 +52,5 @@
         <p>Bookify 2023 All right reserved&copy;</p>
     </footer>
 </body>
+
 </html>
