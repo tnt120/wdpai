@@ -1,0 +1,129 @@
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    background-color: black;
+    color: white;
+}
+
+nav input.nav-button {
+    /* visibility: hidden; */
+    opacity: 0;
+}
+
+.nav-button {
+    display: block;
+    position: absolute;
+    right: 2.5em;
+    width: 32px;
+    height: 32px;
+}
+
+nav .collapse-menu {
+    display: none;
+}
+
+nav .nav-logo {
+    display: flex;
+    justify-content: row;
+    align-items: center;
+    margin-left: 2em;
+}
+
+nav .nav-logo p {
+    margin-left: 1em;
+    font-size: 2em;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5em;
+    font-size: 1.2em;
+}
+
+nav ul > li {
+    list-style: none;
+    margin: 0 2em;
+}
+
+nav ul > li > a{
+    position: relative;
+    color: white;
+    text-decoration: none;
+}
+
+nav ul > li > a:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    margin-bottom: -2px;
+}
+
+a.nav-option.selected:after {
+    width: 100%;
+    left: 0;
+}
+
+nav ul > li > a:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+
+@media only screen and (max-width: 992px) {
+
+    nav .collapse-menu {
+        display: block;
+        padding-right: 2em;
+    }
+
+    nav ul {
+        visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 79px;
+        left: 0;
+        background-color: black;
+        width: 100%;
+        height: auto;
+        font-size: 2em;
+        margin: 0;
+        padding: 0;
+        transform: translateY(-100%);
+        transition: transform .4s ease;
+    }
+
+    nav ul > li {
+        padding: 1em 0;
+    }
+
+    nav ul > li > a:after { 
+        content: none;
+    }
+
+    nav ul > li a:not(.selected) {
+        opacity: 0.3;
+    }
+
+    nav .nav-logo p {
+        display: none;
+    }
+
+    nav input.nav-button:checked + ul {
+        visibility: visible;
+        transform: translateY(0);
+    }
+}

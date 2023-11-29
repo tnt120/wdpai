@@ -1,0 +1,101 @@
+@import url('/public/css/index.css');
+@import url('/public/css/nav.css');
+@import url('/public/css/footer.css');
+
+body {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 100vh;
+    background-color: white;
+}
+
+.logo > img {
+    height: 20em;
+}
+
+form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+}
+
+form > input {
+    margin: 0 1em 1em 1em;
+    padding: 0.5em 2em;
+    background: #F3F1F1;
+    border: 0;
+    line-height: 3.5em;
+    width: 90%;
+    font-family: 'Roboto', sans-serif;
+}
+
+button {
+    margin: 0 1em 1em 1em;
+    padding: 0.5em;
+    border: 0;
+    border-radius: 10px;
+    background: black;
+    color: white;
+    line-height: 2.5em;
+    width: 90%;
+    font-family: 'Roboto', sans-serif;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.priority-button {
+    width: 50%;
+}
+
+.secondary-button {
+    border: 1px solid #000;
+    background: white;
+    color: black;
+}
+
+@media only screen and (max-width: 992px) {
+    main {
+        flex-direction: column;
+        justify-content: center;
+        min-height: calc(100vh - 80px);
+        margin-top: 80px;
+        padding-bottom: 80px;
+    }
+
+    form {
+        margin-top: 0;
+        width: 100%;
+    }
+
+    body {
+        font-size: 16px;
+    }
+
+    .logo > img {
+        width: 10em;
+    }
+
+    button {
+        font-size: 1em;
+    }
+}
