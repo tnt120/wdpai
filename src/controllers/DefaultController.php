@@ -14,6 +14,10 @@ class DefaultController extends AppController
     {
         $this->render('home');
     }
+
+    public function add(){
+        $this->render('addbookpage');
+    }
 }
 
 ?>

@@ -9,6 +9,12 @@
 
 <body>
     <p>Hello it's home page of this app</p>
+    <h2><?= $book->getTitle() ?></h2>
+    <img src="/public/covers/<?= $book->getCover() ?>" alt="cover">
+    <p>Author: <?= $book->getAuthor() ?></p>
+    <p>Genre: <?= $book->getGenre() ?></p>
+    <p>Description: <?= $book->getDescription() ?></p>
+    <p>Rating: <?= $book->getRating() ?></p>
 </body>
 
 </html>
