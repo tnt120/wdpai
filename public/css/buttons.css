@@ -1,0 +1,35 @@
+button {
+    margin: 0 1em 1em 1em;
+    padding: 0.5em;
+    border: 0;
+    border-radius: 10px;
+    background: black;
+    color: white;
+    line-height: 2.5em;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.priority-button {
+    width: 50%;
+}
+
+.secondary-button {
+    border: 1px solid #000;
+    background: white;
+    color: black;
+}
+
+input {
+    margin: 0 1em 1em 1em;
+    padding: 0.5em 2em;
+    background: #F3F1F1;
+    border: 0;
+    line-height: 3.5em;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+}

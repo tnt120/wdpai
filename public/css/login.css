@@ -1,6 +1,7 @@
 @import url('/public/css/index.css');
 @import url('/public/css/nav.css');
 @import url('/public/css/footer.css');
+@import url('/public/css/buttons.css');
 
 body {
     position: relative;
@@ -34,43 +35,7 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 25%;
-}
-
-form > input {
-    margin: 0 1em 1em 1em;
-    padding: 0.5em 2em;
-    background: #F3F1F1;
-    border: 0;
-    line-height: 3.5em;
-    width: 90%;
-    font-family: 'Roboto', sans-serif;
-}
-
-button {
-    margin: 0 1em 1em 1em;
-    padding: 0.5em;
-    border: 0;
-    border-radius: 10px;
-    background: black;
-    color: white;
-    line-height: 2.5em;
-    width: 90%;
-    font-family: 'Roboto', sans-serif;
-}
-
-button:hover {
-    cursor: pointer;
-}
-
-.priority-button {
-    width: 50%;
-}
-
-.secondary-button {
-    border: 1px solid #000;
-    background: white;
-    color: black;
+    width: 30%;
 }
 
 @media only screen and (max-width: 992px) {
@@ -85,6 +50,14 @@ button:hover {
     form {
         margin-top: 0;
         width: 100%;
+    }
+
+    input {
+        width: 90%;
+    }
+
+    button {
+        width: 90%;
     }
 
     body {
