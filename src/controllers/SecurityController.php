@@ -31,6 +31,15 @@ class SecurityController extends AppController
         // $url = "http://$_SERVER[HTTP_HOST]";
         header('Location: /home');
     }
+
+    public function register()
+    {
+        if (!$this->isPost()) {
+            return $this->render('register');
+        }
+
+        var_dump($_POST);
+    }
 }
 
 ?>

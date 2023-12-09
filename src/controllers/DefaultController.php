@@ -15,8 +15,14 @@ class DefaultController extends AppController
         $this->render('home');
     }
 
-    public function add(){
+    public function add()
+    {
         $this->render('addbookpage');
+    }
+
+    public function registration()
+    {
+        $this->render('register');
     }
 }
 
