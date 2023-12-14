@@ -24,6 +24,11 @@ class DefaultController extends AppController
     {
         $this->render('register');
     }
+
+    public function myBookFinished()
+    {
+        $this->render('myBookFinished');
+    }
 }
 
 ?>

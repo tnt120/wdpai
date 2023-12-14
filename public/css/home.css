@@ -1,0 +1,136 @@
+@import url('/public/css/index.css');
+@import url('/public/css/nav.css');
+@import url('/public/css/footer.css');
+@import url('/public/css/buttons.css');
+@import url('/public/css/grid.css');
+
+body {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  background-color: white;
+  margin-top: 80px;
+}
+
+main h1 {
+  font-size: 3em;
+  font-weight: bold;
+  margin-top: 0.5em;
+}
+
+.search-bar {
+  width: 60%;
+}
+
+.search-bar form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+form > input {
+  width: 30%;
+  line-height: 2.5em;
+  border-radius: 10px;
+}
+
+form > button {
+  width: 8%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3.5em;
+}
+
+form > select {
+  width: 25%;
+  height: 3.5em;
+  border-radius: 10px;
+}
+
+.search-bar-select-section {
+  width: 54%;
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+}
+
+.search-bar-select-section select {
+  width: 50%;
+  height: 3.5em;
+  border-radius: 10px;
+}
+
+@media only screen and (min-width: 2499px) {
+      form > input {
+        font-size: 1.2em;
+      }
+      
+      form > button {
+        font-size: 1.2em;
+      }
+      
+      form > select {
+        font-size: 1.2em;
+      }
+      
+      .search-bar-select-section select {
+        font-size: 1.2em;
+      }
+}
+
+@media only screen and (max-width: 992px) {
+    main h1 {
+        font-size: 2em;
+        font-weight: bold;
+        margin-top: 1em;
+    }
+
+    .search-bar {
+        width: 80%;
+    }
+
+    .search-bar form {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    form > input {
+        width: 100%;
+    }
+    
+    form > button {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 3.5em;
+    }
+    
+    form > select {
+        width: 50%;
+        height: 3.5em;
+        border-radius: 10px;
+    }
+    
+    .search-bar-select-section {
+        width: 100%;
+        gap: 1em;
+    }
+    
+    .search-bar-select-section select {
+        width: 50%;
+    }
+}
