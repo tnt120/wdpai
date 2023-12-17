@@ -6,13 +6,17 @@ class User
     private string $password;
     private string $name;
     private string $surname;
+    private string $email;
+    private string $sol;
 
-    public function __construct(string $login, string $password, string $name, string $surname)
+    public function __construct(string $login, string $password, string $name, string $surname, string $email, string $sol)
     {
         $this->login = $login;
         $this->password = $password;
         $this->name = $name;
         $this->surname = $surname;
+        $this->email = $email;
+        $this->sol = $sol;
     }
 
     public function getLogin(): string
