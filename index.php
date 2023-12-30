@@ -10,6 +10,8 @@ Routing::get('home', 'DefaultController');
 Routing::get('add', 'DefaultController');
 Routing::get('registration', 'DefaultController');
 Routing::get('myBookFinished', 'DefaultController');
+Routing::get('myBookToRead','DefaultController');
+Routing::get('myBookCurrentlyReading','DefaultController');
 Routing::post('login', 'SecurityController');
 Routing::post('addBook', 'AddBookContoller');
 Routing::post('register', 'SecurityController');

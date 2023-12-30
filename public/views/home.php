@@ -19,10 +19,10 @@
         <input type="checkbox" class="nav-button" />
         <ul class="menu">
             <li>
-                <a href="#" class="nav-option selected">Search</a>
+                <a href="" class="nav-option selected">Search</a>
             </li>
             <li>
-                <a href="#" class="nav-option">My books</a>
+                <a href="myBookFinished" class="nav-option">My books</a>
             </li>
         </ul>
         <div class="collapse-menu">

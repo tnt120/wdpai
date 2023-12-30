@@ -17,10 +17,10 @@
         <input type="checkbox" class="nav-button" />
         <ul class="menu">
             <li>
-                <a href="#" class="nav-option">Login</a>
+                <a href="login" class="nav-option">Login</a>
             </li>
             <li>
-                <a href="#" class="nav-option selected">Registration</a>
+                <a href="" class="nav-option selected">Registration</a>
             </li>
         </ul>
         <div class="collapse-menu">

@@ -29,6 +29,16 @@ class DefaultController extends AppController
     {
         $this->render('myBookFinished');
     }
+
+    public function myBookToRead()
+    {
+        $this->render('myBookToRead');
+    }
+
+    public function myBookCurrentlyReading()
+    {
+        $this->render('myBookCurrentlyReading');
+    }
 }
 
 ?>
