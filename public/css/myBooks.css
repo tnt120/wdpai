@@ -70,26 +70,38 @@ main .main-my-books-title-wrapper h1 {
 p.content-item-rating {
     width: 85%;
     border-radius: 10px;
-    font-size: 1.2em;
+    font-size: 1.2em !important;
+    padding: 0.2em 0;
     font-weight: bold;
-    padding: 0.1em;
-    margin: 0.5em 0;
-    line-height: 3em;
     border: 1px solid white;
     font-family: 'Roboto', sans-serif;
+}
+
+.buttons {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.buttons button {
+    background-color: white;
+    border: none;
+    display: grid;
+    justify-content: center;
+    align-items: center;
 }
 
 @media only screen and (max-width: 1441px) {
     p.content-item-rating {
         width: 85%;
-        font-size: 0.8em;
+        font-size: 0.8em !important;
         font-weight: bold;
     }
 }
 
 @media only screen and (min-width: 2499px) {
     p.content-item-rating {
-        font-size: 1.4em;
+        font-size: 1.4em !important;
         height: 3em;
     }
 }
