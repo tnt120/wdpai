@@ -59,6 +59,25 @@ class User
         $this->surname = $surname;
     }
 
+    public function getSol(): string
+    {
+        return $this->sol;
+    }
+
+    public function setSol(string $sol): void
+    {
+        $this->sol = $sol;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
 
 }
 
