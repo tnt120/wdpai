@@ -22,6 +22,9 @@
             <li>
                 <a href="" class="nav-option selected">My books</a>
             </li>
+            <li>
+                <a href="/logout" class="nav-option">Logout</a>
+            </li>
         </ul>
         <div class="collapse-menu">
             <img src="/public/img/expand.svg" alt="expand">

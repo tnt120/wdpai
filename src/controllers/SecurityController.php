@@ -3,21 +3,37 @@
 require_once 'AppController.php';
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../repository/UserRepository.php';
+require_once __DIR__ . '/../repository/SessionRepository.php';
 
 class SecurityController extends AppController
 {
 
     public function login()
     {
+        $userRepository = new UserRepository();
+
+        if ($this->isAuthenticated()) {
+            if ($userRepository->getUserRole($this->getSingedUserId()) === 'admin') {
+                header('Location: /dashboard');
+            } else {
+                header('Location: /home');
+            }
+        }
+
         if (!$this->isPost()) {
-            return $this->render('login');
+            $message = '';
+            if (isset($_REQUEST["r"])) {
+                if ($_REQUEST["r"] == "session_expired") {
+                    $message = "Your session expired";
+                }
+            }
+            return $this->render('login', ['messages' => [$message]]);
         }
 
         $login = $_POST['login'];
         $password = $_POST['password'];
 
         try {
-            $userRepository = new UserRepository();
             $user = $userRepository->getUser($login);
         } catch (Exception $e) {
             if ($e->getMessage() == 'Cannot find user') {
@@ -43,6 +59,22 @@ class SecurityController extends AppController
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
+        $sesionRepository = new SessionRepository();
+        $session = $sesionRepository->createSession($user->getUserId());
+
+        if (!$session) {
+            return $this->render('login', ['messages' => ['Problem with log in. Try again.']]);
+        }
+
+        $expirationDate = strtotime("+7 days");
+
+        setcookie("session", $session->getToken(), $expirationDate);
+
+        if ($userRepository->getUserRole($session->getUserId()) === 'admin') {
+            header('Location: /dashboard');
+            return;
+        }
+
         // return $this->render('home');
 
         // $url = "http://$_SERVER[HTTP_HOST]";
@@ -51,6 +83,16 @@ class SecurityController extends AppController
 
     public function register()
     {
+        $userRepository = new UserRepository();
+
+        if ($this->isAuthenticated()) {
+            if ($userRepository->getUserRole($this->getSingedUserId()) === 'admin') {
+                header('Location: /dashboard');
+            } else {
+                header('Location: /home');
+            }
+        }
+
         if (!$this->isPost()) {
             return $this->render('register');
         }
@@ -79,8 +121,6 @@ class SecurityController extends AppController
         $hashedPassword = hash('sha512', $salt . $password);
 
         try {
-            $userRepository = new UserRepository();
-
             if ($userRepository->isLoginExist($login)) {
                 return $this->render('register', ['messages' => ['User with provided login is already exist']]);
             }
@@ -94,7 +134,43 @@ class SecurityController extends AppController
             return $this->render('register', ['messages' => ['Error during registration: ' . $e->getMessage()]]);
         }
 
+        $user = $userRepository->getUser($login);
+
+        $sesionRepository = new SessionRepository();
+        $session = $sesionRepository->createSession($user->getUserId());
+
+        if (!$session) {
+            return $this->render('login', ['messages' => ['Problem with log in. Try again.']]);
+        }
+
+        $expirationDate = strtotime("+7 days");
+
+        setcookie("session", $session->getToken(), $expirationDate);
+
+        if ($userRepository->getUserRole($session->getUserId()) === 'admin') {
+            header('Location: /dashboard');
+            return;
+        }
+
+
         header('Location: /home');
+    }
+
+    public function logout()
+    {
+        if (!isset($_COOKIE['session'])) {
+            header('Location: /login');
+        }
+
+        $sessionRepository = new SessionRepository();
+        $session = $sessionRepository->getSession($_COOKIE['session']);
+
+        if ($session) {
+            $sessionRepository->deleteSession($session->getToken());
+        }
+
+        setcookie('session', '');
+        header('Location: /login');
     }
 }
 

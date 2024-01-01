@@ -9,7 +9,7 @@ class UserRepository extends Repository
     public function getUser(string $login): ?User
     {
         $stmt = $this->database->connect()->prepare('
-            SELECT login, password, name, surname, email, sol FROM "Users" NATURAL JOIN "UserDetails" where login = :login
+            SELECT user_id, login, password, name, surname, email, sol FROM "Users" NATURAL JOIN "UserDetails" where login = :login
         ');
         $stmt->bindParam(':login', $login, PDO::PARAM_STR);
         $stmt->execute();
@@ -21,6 +21,7 @@ class UserRepository extends Repository
         }
 
         return new User(
+            $user['user_id'],
             $user['login'],
             $user['password'],
             $user['name'],
@@ -86,6 +87,15 @@ class UserRepository extends Repository
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetch() !== false;
+    }
+
+    public function getUserRole(int $user_id): string
+    {
+        $stmt = $this->database->connect()->prepare('SELECT name FROM "Users" NATURAL JOIN "Roles" WHERE user_id = :id');
+        $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['name'];
     }
 }
 

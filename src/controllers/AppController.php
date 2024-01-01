@@ -36,6 +36,53 @@ class AppController
 
         print $output;
     }
+
+    protected function isAuthenticated(): bool
+    {
+
+        if (!isset($_COOKIE['session'])) {
+            return false;
+        }
+
+        $token = $_COOKIE['session'];
+
+        $sessionRepository = new SessionRepository();
+        $session = $sessionRepository->getSession($token);
+
+        if ($session) {
+            if ($session->isNotExpired()) {
+                $sessionRepository->extendSession($token);
+
+                if (!isset($_COOKIE['short-lived-session'])) {
+                    setcookie('session', $token, strtotime('+7 days'));
+                }
+
+                return true;
+            }
+
+            setcookie('session', '');
+        }
+
+        return false;
+    }
+
+    protected function getSingedUserId(): ?int
+    {
+        if (!isset($_COOKIE['session'])) {
+            return null;
+        }
+
+        $token = $_COOKIE['session'];
+
+        $sessionRepository = new SessionRepository();
+        $session = $sessionRepository->getSession($token);
+
+        if ($session && $session->isNotExpired()) {
+            return $session->getUserId();
+        }
+
+        return null;
+    }
 }
 
 ?>

@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<nav>
+    <nav>
         <div class="nav-logo">
             <img src="/public/img/logo-white.svg" alt="logo">
             <p>Bookify</p>
@@ -17,10 +17,13 @@
         <input type="checkbox" class="nav-button" />
         <ul class="menu">
             <li>
-                <a href="#" class="nav-option">Dashboard</a>
+                <a href="/dashboard" class="nav-option">Dashboard</a>
             </li>
             <li>
-                <a href="#" class="nav-option selected">Add book</a>
+                <a href="" class="nav-option selected">Add book</a>
+            </li>
+            <li>
+                <a href="/logout" class="nav-option">Logout</a>
             </li>
         </ul>
         <div class="collapse-menu">
@@ -30,7 +33,7 @@
     <main>
         <h1>Add book</h1>
         <form action="addBook" method="POST" enctype="multipart/form-data">
-        <div class="message">
+            <div class="message">
                 <?php
                 if (isset($messages)) {
                     foreach ($messages as $message) {

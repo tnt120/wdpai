@@ -1,43 +1,104 @@
 <?php
 
 require_once 'AppController.php';
+require_once __DIR__ . '/../repository/UserRepository.php';
 
 class DefaultController extends AppController
 {
+    private $userRepository;
+
+    public function __construct()
+    {
+        $this->userRepository = new UserRepository();
+    }
 
     public function login()
     {
+        if ($this->isAuthenticated()) {
+            if ($this->userRepository->getUserRole($this->getSingedUserId()) === 'admin') {
+                header('Location: /dashboard');
+            } else {
+                header('Location: /home');
+            }
+            return;
+        }
         $this->render('login');
     }
 
     public function home()
     {
-        $this->render('home');
+        if ($this->isAuthenticated()) {
+            $this->render('home');
+        } else {
+            header('Location: /login');
+        }
     }
 
     public function add()
     {
-        $this->render('addbookpage');
+        if ($this->isAuthenticated()) {
+            if ($this->userRepository->getUserRole($this->getSingedUserId()) === 'admin') {
+                $this->render('addbookpage');
+            } else {
+                header('Location: /home');
+            }
+        } else {
+            header('Location: /login');
+        }
+    }
+
+    public function dashboard()
+    {
+        if ($this->isAuthenticated()) {
+            if ($this->userRepository->getUserRole($this->getSingedUserId()) === 'admin') {
+                $this->render('dashboard');
+            } else {
+                header('Location: /home');
+            }
+        } else {
+            header('Location: /login');
+        }
     }
 
     public function registration()
     {
+        if ($this->isAuthenticated()) {
+            if ($this->userRepository->getUserRole($this->getSingedUserId()) === 'admin') {
+                header('Location: /dashboard');
+            } else {
+                header('Location: /home');
+            }
+            return;
+        }
         $this->render('register');
     }
 
     public function myBookFinished()
     {
-        $this->render('myBookFinished');
+        if ($this->isAuthenticated()) {
+            $this->render('myBookFinished');
+        } else {
+            header('Location: /login');
+        }
     }
 
     public function myBookToRead()
     {
-        $this->render('myBookToRead');
+        if ($this->isAuthenticated()) {
+            $this->render('myBookToRead');
+        } else {
+            header('Location: /login');
+            ;
+        }
     }
 
     public function myBookCurrentlyReading()
     {
-        $this->render('myBookCurrentlyReading');
+        if ($this->isAuthenticated()) {
+            $this->render('myBookCurrentlyReading');
+        } else {
+            header('Location: /login');
+        }
     }
 }
 

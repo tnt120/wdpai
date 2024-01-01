@@ -1,0 +1,29 @@
+@import url('/public/css/index.css');
+@import url('/public/css/nav.css');
+@import url('/public/css/footer.css');
+
+body {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: white;
+}
+
+main > h1 {
+    margin-bottom: 1em;
+}
