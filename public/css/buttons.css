@@ -30,6 +30,17 @@ input {
     font-family: 'Roboto', sans-serif;
 }
 
+input.no-valid {
+    border: 1px solid red ;
+    box-shadow: 0 0 0.2em red;
+}
+
+.error-message {
+    text-align: center;
+    color: red;
+    font-size: 0.8em;
+}
+
 .file-input::before {
     content: "Cover: "
 }

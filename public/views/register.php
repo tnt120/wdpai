@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/css/register.css">
+    <script type="text/javascript" src="./public/js/script.js" defer></script>
     <title>Registration</title>
 </head>
 
@@ -47,12 +48,12 @@
                     }
                     ?>
                 </div>
-                <input type="text" name="firstName" placeholder="First name">
-                <input type="text" name="lastName" placeholder="Last name">
-                <input type="text" name="email" placeholder="E-mail">
-                <input type="text" name="login" placeholder="Login">
-                <input type="password" name="password" placeholder="Password">
-                <input type="password" name="passwordConfirmation" placeholder="Confirm password">
+                <input type="text" name="firstName" placeholder="First name" required>
+                <input type="text" name="lastName" placeholder="Last name" required>
+                <input type="text" name="email" placeholder="E-mail" required>
+                <input type="text" name="login" placeholder="Login" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="passwordConfirmation" placeholder="Confirm password" required>
 
                 <button type="submit" class="priority-button">Create account</button>
             </form>
