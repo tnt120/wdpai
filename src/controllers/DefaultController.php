@@ -25,15 +25,6 @@ class DefaultController extends AppController
         $this->render('login');
     }
 
-    public function home()
-    {
-        if ($this->isAuthenticated()) {
-            $this->render('home');
-        } else {
-            header('Location: /login');
-        }
-    }
-
     public function add()
     {
         if ($this->isAuthenticated()) {

@@ -56,17 +56,25 @@
             </form>
         </div>
         <section class="content">
-            <div class="content-item">
-                <div class="content-item-image">
-                    <img src="/public/covers/HP-deathly-hallows-cover.jpg" alt="cover" />
+            <?php foreach ($books as $book): ?>
+                <div class="content-item">
+                    <div class="content-item-image">
+                        <img src="/public/covers/<?php echo $book->getCoverImg(); ?>" alt="cover" />
+                    </div>
+                    <h3 class="content-item-title">
+                        <?php echo $book->getTitle(); ?>
+                    </h3>
+                    <p class="content-item-author">
+                        <?php echo $book->getAuthor(); ?>
+                    </p>
+                    <p class="content-item-rating">
+                        <?php echo $book->getRating(); ?>
+                    </p>
+                    <button type="button" class="secondary-button">Details</button>
                 </div>
-                <h3 class="content-item-title">Harry Potter and The Deathly Hallows</h3>
-                <p class="content-item-author">J.K. Rowling</p>
-                <p class="content-item-rating">Rating: 5.0</p>
-                <button type="button" class="secondary-button">Details</button>
-            </div>
+            <?php endforeach; ?>
 
-            <div class="content-item">
+            <!-- <div class="content-item">
                 <div class="content-item-image">
                     <img src="/public/covers/cover2.jpg" alt="cover" />
                 </div>
@@ -124,7 +132,7 @@
                 <p class="content-item-author">J.K. Rowling</p>
                 <p class="content-item-rating">Rating: 5.0</p>
                 <button type="button" class="secondary-button">Details</button>
-            </div>
+            </div> -->
         </section>
     </main>
     <footer>
