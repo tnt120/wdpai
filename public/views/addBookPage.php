@@ -43,17 +43,21 @@
                 ?>
             </div>
             <input name="title" type="text" placeholder="Title">
-            <select name="author" id="author" placeholder="Author">
-                <option value="author1">Select Author</option>
-                <option value="author2">Author2</option>
-                <option value="author3">Author3</option>
-                <option value="author4">Author4</option>
+            <select name="author">
+                <option value="">Author</option>
+                <?php foreach ($authors as $author): ?>
+                    <option value="<?php echo $author->getAuthorId() ?>">
+                        <?php echo $author->getName() . ' ' . $author->getSurname() ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
-            <select name="genre" id="genre" placeholder="Genre">
-                <option value="genre1">Select Genre</option>
-                <option value="genre2">Genre2</option>
-                <option value="genre3">Genre3</option>
-                <option value="genre4">Genre4</option>
+            <select name="genre">
+                <option value="">Genre</option>
+                <?php foreach ($genres as $genre): ?>
+                    <option value="<?php echo $genre->getGenreId() ?>">
+                        <?php echo $genre->getName() ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
             <textarea name="description" id="description" cols="30" rows="10" placeholder="Description"></textarea>
             <input type="file" name="file" id="file" class="file-input" placeholder="Add cover">
