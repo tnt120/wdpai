@@ -29,24 +29,20 @@ main h1 {
 }
 
 .search-bar {
-  width: 60%;
-}
-
-.search-bar form {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  width: 100%;
+  width: 60%;
 }
 
-form > input {
+input {
   width: 30%;
   line-height: 2.5em;
   border-radius: 10px;
 }
 
-form > button {
+button {
   width: 8%;
   display: flex;
   justify-content: center;
@@ -54,7 +50,7 @@ form > button {
   height: 3.5em;
 }
 
-form > select {
+select {
   width: 25%;
   height: 3.5em;
   border-radius: 10px;
@@ -74,15 +70,15 @@ form > select {
 }
 
 @media only screen and (min-width: 2499px) {
-      form > input {
+      input {
         font-size: 1.2em;
       }
       
-      form > button {
+      button {
         font-size: 1.2em;
       }
       
-      form > select {
+      select {
         font-size: 1.2em;
       }
       
@@ -99,19 +95,15 @@ form > select {
     }
 
     .search-bar {
+        flex-direction: column;
         width: 80%;
     }
-
-    .search-bar form {
-        flex-direction: column;
+    
+    input {
         width: 100%;
     }
     
-    form > input {
-        width: 100%;
-    }
-    
-    form > button {
+    button {
         width: 100%;
         display: flex;
         justify-content: center;
@@ -119,7 +111,7 @@ form > select {
         height: 3.5em;
     }
     
-    form > select {
+    select {
         width: 50%;
         height: 3.5em;
         border-radius: 10px;

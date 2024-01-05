@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/public/css/home.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script type="text/javascript" src="./public/js/search.js" defer></script>
     <title>Home</title>
 </head>
 
@@ -35,25 +36,26 @@
     <main>
         <h1>Find your book</h1>
         <div class="search-bar">
-            <form action="" method="POST">
-                <input type="text" name="title" placeholder="Title" />
-                <div class="search-bar-select-section">
-                    <select name="genre">
-                        <option value="Genre1">Genre</option>
-                        <option value="Genre2">Genre2</option>
-                        <option value="Genre3">Genre3</option>
-                        <option value="Genre4">Genre4</option>
-                    </select>
-                    <select name="author">
-                        <option value="Author1">Author</option>
-                        <option value="Author2">Author2</option>
-                        <option value="Author3">Author3</option>
-                        <option value="Author4">Author4</option>
-                    </select>
-                </div>
-                <button type="submit" class="primary-button"><span
-                        class="material-symbols-outlined">search</span></button>
-            </form>
+            <input type="text" name="title" placeholder="Title" />
+            <div class="search-bar-select-section">
+                <select name="author">
+                    <option value="">Author</option>
+                    <?php foreach ($authors as $author): ?>
+                        <option value="<?php echo $author->getAuthorId() ?>">
+                            <?php echo $author->getName() . ' ' . $author->getSurname() ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <select name="genre">
+                    <option value="">Genre</option>
+                    <?php foreach ($genres as $genre): ?>
+                        <option value="<?php echo $genre->getGenreId() ?>">
+                            <?php echo $genre->getName() ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <button type="button" class="primary-button"><span class="material-symbols-outlined">search</span></button>
         </div>
         <section class="content">
             <?php foreach ($books as $book): ?>
@@ -68,76 +70,34 @@
                         <?php echo $book->getAuthor(); ?>
                     </p>
                     <p class="content-item-rating">
+                        Rating:
                         <?php echo $book->getRating(); ?>
                     </p>
                     <button type="button" class="secondary-button">Details</button>
                 </div>
             <?php endforeach; ?>
-
-            <!-- <div class="content-item">
-                <div class="content-item-image">
-                    <img src="/public/covers/cover2.jpg" alt="cover" />
-                </div>
-                <h3 class="content-item-title">A song of Ice and Fire</h3>
-                <p class="content-item-author">George R.R. Martin</p>
-                <p class="content-item-rating">Rating: 4.98</p>
-                <button type="button" class="secondary-button">Details</button>
-            </div>
-
-            <div class="content-item">
-                <div class="content-item-image">
-                    <img src="/public/covers/cover3.jpg" alt="cover" />
-                </div>
-                <h3 class="content-item-title">IT</h3>
-                <p class="content-item-author">Stephen King</p>
-                <p class="content-item-rating">Rating: 4.5</p>
-                <button type="button" class="secondary-button">Details</button>
-            </div>
-
-            <div class="content-item">
-                <div class="content-item-image">
-                    <img src="/public/covers/cover4.jpg" alt="cover" />
-                </div>
-                <h3 class="content-item-title">The Outsider</h3>
-                <p class="content-item-author">Stephen King</p>
-                <p class="content-item-rating">Rating: 5.0</p>
-                <button type="button" class="secondary-button">Details</button>
-            </div>
-
-            <div class="content-item">
-                <div class="content-item-image">
-                    <img src="/public/covers/HP-deathly-hallows-cover.jpg" alt="cover" />
-                </div>
-                <h3 class="content-item-title">Harry Potter and The Deathly Hallows</h3>
-                <p class="content-item-author">J.K. Rowling</p>
-                <p class="content-item-rating">Rating: 5.0</p>
-                <button type="button" class="secondary-button">Details</button>
-            </div>
-
-            <div class="content-item">
-                <div class="content-item-image">
-                    <img src="/public/covers/HP-deathly-hallows-cover.jpg" alt="cover" />
-                </div>
-                <h3 class="content-item-title">Harry Potter and The Deathly Hallows</h3>
-                <p class="content-item-author">J.K. Rowling</p>
-                <p class="content-item-rating">Rating: 5.0</p>
-                <button type="button" class="secondary-button">Details</button>
-            </div>
-
-            <div class="content-item">
-                <div class="content-item-image">
-                    <img src="/public/covers/HP-deathly-hallows-cover.jpg" alt="cover" />
-                </div>
-                <h3 class="content-item-title">Harry Potter and The Deathly Hallows</h3>
-                <p class="content-item-author">J.K. Rowling</p>
-                <p class="content-item-rating">Rating: 5.0</p>
-                <button type="button" class="secondary-button">Details</button>
-            </div> -->
         </section>
     </main>
     <footer>
         <p>Bookify 2023 All right reserved&copy;</p>
     </footer>
 </body>
+<template id="book-template">
+    <div class="content-item">
+        <div class="content-item-image">
+            <img src="" alt="cover" />
+        </div>
+        <h3 class="content-item-title">
+            title
+        </h3>
+        <p class="content-item-author">
+            author
+        </p>
+        <p class="content-item-rating">
+            Rating: rating
+        </p>
+        <button type="button" class="secondary-button">Details</button>
+    </div>
+</template>
 
 </html>

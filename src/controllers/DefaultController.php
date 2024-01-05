@@ -25,19 +25,6 @@ class DefaultController extends AppController
         $this->render('login');
     }
 
-    public function add()
-    {
-        if ($this->isAuthenticated()) {
-            if ($this->userRepository->getUserRole($this->getSingedUserId()) === 'admin') {
-                $this->render('addbookpage');
-            } else {
-                header('Location: /home');
-            }
-        } else {
-            header('Location: /login');
-        }
-    }
-
     public function dashboard()
     {
         if ($this->isAuthenticated()) {
