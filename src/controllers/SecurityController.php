@@ -43,10 +43,6 @@ class SecurityController extends AppController
             }
         }
 
-        $salt = $user->getSol();
-        $hashedPassword = hash('sha512', $salt . $password);
-
-
         if (!$user) {
             return $this->render('login', ['messages' => ['User with this login not exist!']]);
         }
@@ -54,6 +50,9 @@ class SecurityController extends AppController
         if ($user->getLogin() !== $login) {
             return $this->render('login', ['messages' => ['User with this login not exist!']]);
         }
+
+        $salt = $user->getSol();
+        $hashedPassword = hash('sha512', $salt . $password);
 
         if ($user->getPassword() !== $hashedPassword) {
             return $this->render('login', ['messages' => ['Wrong password!']]);
