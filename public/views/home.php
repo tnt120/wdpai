@@ -8,6 +8,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script type="text/javascript" src="./public/js/search.js" defer></script>
+    <script type="text/javascript" src="./public/js/redirect.js"></script>
     <title>Home</title>
 </head>
 
@@ -73,7 +74,8 @@
                         Rating:
                         <?php echo $book->getRating(); ?>
                     </p>
-                    <button type="button" class="secondary-button">Details</button>
+                    <button type="button" class="secondary-button"
+                        onclick="redirectDetails(<?= $book->getBookId() ?>)">Details</button>
                 </div>
             <?php endforeach; ?>
         </section>
@@ -96,7 +98,8 @@
         <p class="content-item-rating">
             Rating: rating
         </p>
-        <button type="button" class="secondary-button">Details</button>
+        <button type="button" class="secondary-button"
+            onclick="redirectDetails(<?= $book->getBookId() ?>)">Details</button>
     </div>
 </template>
 

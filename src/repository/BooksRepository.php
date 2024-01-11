@@ -35,6 +35,38 @@ class BooksRepository extends Repository
         return $result;
     }
 
+    public function getBook(int $book_id): ?Book
+    {
+
+        $stmt = $this->database->connect()->prepare('SELECT book_id, title, a.name, surname, g.name AS genre, url, description, rating FROM 
+            "Books" b
+            JOIN "Authors" a ON b.author_id = a.author_id
+            JOIN "Genres" g ON b.genre_id = g.genre_id
+            JOIN "Images" i ON b.image_id = i.image_id
+            WHERE book_id = :id
+        ');
+        $stmt->bindParam(':id', $book_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $book = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($book == false) {
+            throw new Exception('Cannot find book');
+        }
+
+        $author = $book['name'] . ' ' . $book['surname'];
+
+        return new Book(
+            $book['book_id'],
+            $book['title'],
+            $author,
+            $book['genre'],
+            $book['url'],
+            $book['description'],
+            $book['rating']
+        );
+    }
+
+
     public function getBooksBySearchQueries(string $title, string $author, string $genre)
     {
         $title = '%' . strtolower($title) . '%';

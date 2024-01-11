@@ -8,6 +8,7 @@ $path = parse_url($path, PHP_URL_PATH);
 Routing::get('', 'DefaultController');
 Routing::get('home', 'BookController');
 Routing::get('add', 'BookController');
+Routing::get('details', 'BookController');
 Routing::get('registration', 'DefaultController');
 Routing::get('myBookFinished', 'DefaultController');
 Routing::get('myBookToRead', 'DefaultController');
@@ -19,6 +20,7 @@ Routing::post('login', 'SecurityController');
 Routing::post('addBook', 'BookController');
 Routing::post('register', 'SecurityController');
 Routing::post('search', 'BookController');
+Routing::post('getCover', 'CoverController');
 
 Routing::run($path);
 

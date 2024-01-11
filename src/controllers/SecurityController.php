@@ -168,7 +168,7 @@ class SecurityController extends AppController
             $sessionRepository->deleteSession($session->getToken());
         }
 
-        setcookie('session', '');
+        setcookie("session", "", time() - 3600);
         header('Location: /login');
     }
 }

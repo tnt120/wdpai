@@ -55,6 +55,20 @@ class BookController extends AppController
         }
     }
 
+    public function details()
+    {
+        if ($this->isAuthenticated() && isset($_GET['book'])) {
+            try {
+                $book = $this->booksRepository->getBook((int) $_GET['book']);
+                $this->render('bookDetails', ['book' => $book]);
+            } catch (Exception $e) {
+                $this->render('unexpectedError', ['error' => $e]);
+            }
+        } else {
+            header('Location: /login');
+        }
+    }
+
     public function addBook()
     {
         if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {

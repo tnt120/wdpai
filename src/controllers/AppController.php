@@ -37,6 +37,11 @@ class AppController
         print $output;
     }
 
+    public function displayError($error)
+    {
+        $this->render('unexpectedError', ['error' => $error]);
+    }
+
     protected function isAuthenticated(): bool
     {
 

@@ -3,6 +3,7 @@
 require_once 'src/controllers/DefaultController.php';
 require_once 'src/controllers/SecurityController.php';
 require_once 'src/controllers/BookController.php';
+require_once 'src/controllers/CoverController.php';
 
 class Routing
 {
@@ -24,7 +25,9 @@ class Routing
         $action = explode("/", $url)[0];
 
         if (!array_key_exists($action, self::$routes)) {
-            die("Wrong url!");
+            $appController = new AppController();
+            $appController->displayError('Wrong url! This url does not exist');
+            return;
         }
 
         $controller = self::$routes[$action];
