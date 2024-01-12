@@ -50,34 +50,6 @@ class DefaultController extends AppController
         }
         $this->render('register');
     }
-
-    public function myBookFinished()
-    {
-        if ($this->isAuthenticated()) {
-            $this->render('myBookFinished');
-        } else {
-            header('Location: /login');
-        }
-    }
-
-    public function myBookToRead()
-    {
-        if ($this->isAuthenticated()) {
-            $this->render('myBookToRead');
-        } else {
-            header('Location: /login');
-            ;
-        }
-    }
-
-    public function myBookCurrentlyReading()
-    {
-        if ($this->isAuthenticated()) {
-            $this->render('myBookCurrentlyReading');
-        } else {
-            header('Location: /login');
-        }
-    }
 }
 
 ?>

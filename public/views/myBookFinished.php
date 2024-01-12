@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/css/myBooks.css">
+    <script type="text/javascript" src="./public/js/booksHandler.js"></script>
     <title>My books - finished</title>
 </head>
 
@@ -47,47 +48,30 @@
             </ul>
         </div>
         <section class="content">
-            <div class="content-item">
-                <div class="content-item-image">
-                    <img src="/public/covers/HP-deathly-hallows-cover.jpg" alt="cover" />
+            <?php foreach ($books as $book): ?>
+                <div class="content-item">
+                    <div class="content-item-image">
+                        <img src="/public/covers/<?php echo $book->getCoverImg(); ?>" alt="cover" />
+                    </div>
+                    <h3 class="content-item-title">
+                        <?php echo $book->getTitle(); ?>
+                    </h3>
+                    <p class="content-item-author">
+                        <?php echo $book->getAuthor(); ?>
+                    </p>
+                    <p class="content-item-rating">Your rating:
+                        <? echo $book->getUserRating() ?>
+                    </p>
+                    <div class="buttons">
+                        <button class="button reading" onclick="updateUserBook(2, <?= $book->getBookId() ?>)"><img
+                                src="/public/img/reading.svg" alt="reading"></button>
+                        <button class="button to-read" onclick="updateUserBook(3, <?= $book->getBookId() ?>)"><img
+                                src="/public/img/to-read.svg" alt="to-read"></button>
+                        <button class="button remove" onclick="removeUserBook(<?= $book->getBookId() ?>)"><img
+                                src="/public/img/delete.svg" alt="delete"></button>
+                    </div>
                 </div>
-                <h3 class="content-item-title">Harry Potter and The Deathly Hallows</h3>
-                <p class="content-item-author">J.K. Rowling</p>
-                <p class="content-item-rating">Your rating: 5.0</p>
-                <div class="buttons">
-                    <button class="button"><img src="/public/img/reading.svg" alt="reading"></button>
-                    <button class="button"><img src="/public/img/to-read.svg" alt="to-read"></button>
-                    <button class="button"><img src="/public/img/delete.svg" alt="delete"></button>
-                </div>
-            </div>
-
-            <div class="content-item">
-                <div class="content-item-image">
-                    <img src="/public/covers/cover2.jpg" alt="cover" />
-                </div>
-                <h3 class="content-item-title">A song of Ice and Fire</h3>
-                <p class="content-item-author">George R.R. Martin</p>
-                <p class="content-item-rating">Your rating: 4.5</p>
-                <div class="buttons">
-                    <button class="button"><img src="/public/img/reading.svg" alt="reading"></button>
-                    <button class="button"><img src="/public/img/to-read.svg" alt="to-read"></button>
-                    <button class="button"><img src="/public/img/delete.svg" alt="delete"></button>
-                </div>
-            </div>
-
-            <div class="content-item">
-                <div class="content-item-image">
-                    <img src="/public/covers/cover3.jpg" alt="cover" />
-                </div>
-                <h3 class="content-item-title">IT</h3>
-                <p class="content-item-author">Stephen King</p>
-                <p class="content-item-rating">Your rating: 5.0</p>
-                <div class="buttons">
-                    <button class="button"><img src="/public/img/reading.svg" alt="reading"></button>
-                    <button class="button"><img src="/public/img/to-read.svg" alt="to-read"></button>
-                    <button class="button"><img src="/public/img/delete.svg" alt="delete"></button>
-                </div>
-            </div>
+            <?php endforeach; ?>
 
         </section>
     </main>

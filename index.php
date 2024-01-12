@@ -10,17 +10,23 @@ Routing::get('home', 'BookController');
 Routing::get('add', 'BookController');
 Routing::get('details', 'BookController');
 Routing::get('registration', 'DefaultController');
-Routing::get('myBookFinished', 'DefaultController');
-Routing::get('myBookToRead', 'DefaultController');
-Routing::get('myBookCurrentlyReading', 'DefaultController');
+Routing::get('myBookFinished', 'UsersBookController');
+Routing::get('myBookToRead', 'UsersBookController');
+Routing::get('myBookCurrentlyReading', 'UsersBookController');
 Routing::get('dashboard', 'DefaultController');
 
 Routing::post("logout", "SecurityController");
 Routing::post('login', 'SecurityController');
 Routing::post('addBook', 'BookController');
 Routing::post('register', 'SecurityController');
+
+// API Endpoints
+
 Routing::post('search', 'BookController');
 Routing::post('getCover', 'CoverController');
+Routing::post('getUserBook', 'UsersBookController');
+Routing::post('addUserBook', 'UsersBookController');
+Routing::post('removeUserBook', 'UsersBookController');
 
 Routing::run($path);
 

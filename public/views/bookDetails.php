@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/css/bookDetails.css">
+    <script type="text/javascript" src="./public/js/booksDetailsHandler.js" defer></script>
     <script type="text/javascript" src="./public/js/details.js" defer></script>
     <script type="text/javascript" src="./public/js/redirect.js"></script>
     <title>Details</title>
@@ -58,9 +59,10 @@
             </div>
         </section>
         <aside class="aside-buttons-container">
-            <button type="button" class="secondary-button">To read</button>
-            <button type="button" class="secondary-button">Reading</button>
-            <button type="button" class="primary-button">Finished</button>
+            <button type="button" class="secondary-button to-read">To read</button>
+            <button type="button" class="secondary-button reading">Reading</button>
+            <button type="button" class="primary-button finished">Finished</button>
+            <button style="display: none;" class="primary-button remove">Remove</button>
         </aside>
     </main>
     <footer>

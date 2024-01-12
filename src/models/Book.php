@@ -9,6 +9,7 @@ class Book
     private string $coverImg;
     private string $description;
     private float $rating;
+    private float $userRating;
 
     public function __construct($book_id, $title, $author, $genre, $coverImg, $description, $rating)
     {
@@ -84,6 +85,16 @@ class Book
     public function setCover(string $coverImg)
     {
         $this->coverImg = $coverImg;
+    }
+
+    public function setUserRating(float $userRating)
+    {
+        $this->userRating = $userRating;
+    }
+
+    public function getUserRating(): float
+    {
+        return $this->userRating;
     }
 }
 
