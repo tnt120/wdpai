@@ -25,5 +25,3 @@ class AuthorsRepository extends Repository
         return $result;
     }
 }
-
-?>

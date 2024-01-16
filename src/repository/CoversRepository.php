@@ -16,5 +16,3 @@ class CoversRepository extends Repository
         return $cover['url'];
     }
 }
-
-?>

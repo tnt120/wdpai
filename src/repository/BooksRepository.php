@@ -101,6 +101,44 @@ class BooksRepository extends Repository
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-}
 
-?>
+    public function createBook(string $title, int $author, int $genre, string $coverImg, string $description): ?bool
+    {
+
+        try {
+
+            $connection = $this->database->connect();
+
+            $connection->beginTransaction();
+
+            $stmt = $connection->prepare('INSERT INTO "Images" (url) VALUES (?)');
+
+            $stmt->execute([
+                $coverImg
+            ]);
+
+            $imgId = $connection->lastInsertId();
+
+            $stmt = $connection->prepare('INSERT INTO "Books" (title, genre_id, author_id, image_id, description, rating) VALUES (?, ?, ?, ?, ?, ?)');
+
+            $stmt->execute([
+                $title,
+                $genre,
+                $author,
+                $imgId,
+                $description,
+                0.0
+            ]);
+
+            $connection->commit();
+            $book = $stmt->rowCount();
+
+            return ($book === 1);
+
+        } catch (Exception $e) {
+            $connection->rollback();
+            throw $e;
+        }
+
+    }
+}

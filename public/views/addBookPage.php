@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/css/addBookPage.css">
+    <script type="text/javascript" src="./public/js/addValidation.js" defer></script>
     <title>Add book</title>
 </head>
 
@@ -42,9 +43,9 @@
                 }
                 ?>
             </div>
-            <input name="title" type="text" placeholder="Title">
+            <input name="title" type="text" placeholder="Title" required>
             <select name="author">
-                <option value="">Author</option>
+                <option value="none">Author</option>
                 <?php foreach ($authors as $author): ?>
                     <option value="<?php echo $author->getAuthorId() ?>">
                         <?php echo $author->getName() . ' ' . $author->getSurname() ?>
@@ -52,15 +53,16 @@
                 <?php endforeach; ?>
             </select>
             <select name="genre">
-                <option value="">Genre</option>
+                <option value="none">Genre</option>
                 <?php foreach ($genres as $genre): ?>
                     <option value="<?php echo $genre->getGenreId() ?>">
                         <?php echo $genre->getName() ?>
                     </option>
                 <?php endforeach; ?>
             </select>
-            <textarea name="description" id="description" cols="30" rows="10" placeholder="Description"></textarea>
-            <input type="file" name="file" id="file" class="file-input" placeholder="Add cover">
+            <textarea name="description" id="description" cols="30" rows="10" placeholder="Description"
+                required></textarea>
+            <input type="file" name="file" id="file" class="file-input" placeholder="Add cover" required>
             <button type="submit" class="priority-button">ADD</button>
         </form>
     </main>

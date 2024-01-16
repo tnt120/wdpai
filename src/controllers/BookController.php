@@ -11,7 +11,7 @@ class BookController extends AppController
 {
 
     const MAX_FILE_SIZE = 1024 * 1024;
-    const SUPPORTED_TYPES = ['image/png', 'image/jpg'];
+    const SUPPORTED_TYPES = ['image/png', 'image/jpg', 'image/jpeg'];
     const UPLOAD_DIRECTIORY = '/../public/covers/';
     private $messages = [];
     private $booksRepository;
@@ -77,9 +77,29 @@ class BookController extends AppController
                 dirname(__DIR__) . self::UPLOAD_DIRECTIORY . $_FILES['file']['name']
             );
 
-            //$book = new Book($_POST['title'], $_POST['genre'], $_POST['author'], $_POST['description'], 0, $_FILES['file']['name']);
+            $isAdded = false;
 
-            return $this->render('home', ['messages' => $this->messages, /*'book' => $book*/]);
+            $booksTitle = $this->booksRepository->getBooksBySearchQueries($_POST['title'], "", "");
+            $authors = $this->authorsRepository->getAuthors();
+            $genres = $this->genresRepository->getGenres();
+
+            if (!empty($booksTitle)) {
+                $this->render('addBookPage', ['messages' => ['Adding the book failed! Book with this title already exists!'], 'authors' => $authors, 'genres' => $genres]);
+                return;
+            }
+
+            try {
+                $isAdded = $this->booksRepository->createBook($_POST['title'], $_POST['author'], $_POST['genre'], $_FILES['file']['name'], $_POST['description']);
+            } catch (Exception $e) {
+                $this->render('addBookPage', ['messages' => ['Cannot add book: ' . $e], 'authors' => $authors, 'genres' => $genres]);
+                return;
+            }
+
+            if ($isAdded) {
+                return $this->render('addBookPage', ['messages' => ['Book was added succesfully!'], 'authors' => $authors, 'genres' => $genres]);
+            } else {
+                return $this->render('addBookPage', ['messages' => ['Adding the book failed!'], 'authors' => $authors, 'genres' => $genres]);
+            }
         }
         echo dirname(__DIR__) . self::UPLOAD_DIRECTIORY . $_FILES['file']['name'];
         $this->render('addBookPage', ['messages' => $this->messages]);
@@ -110,6 +130,7 @@ class BookController extends AppController
 
         if (!isset($file['type']) || !in_array($file['type'], self::SUPPORTED_TYPES)) {
             $this->messages[] = 'This file type is not supported';
+            var_dump($file['type']);
             return false;
         }
 
