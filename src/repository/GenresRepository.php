@@ -55,4 +55,30 @@ class GenresRepository extends Repository
 
         return ($result > 0);
     }
+
+    public function removeGenre(string $id): ?bool
+    {
+        $stmt = $this->database->connect()->prepare('DELETE FROM "Genres" WHERE genre_id = :id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        try {
+            $stmt->execute();
+            return ($stmt->rowCount() > 0) ? 200 : 204;
+        } catch (PDOException $e) {
+            return 500;
+        }
+    }
+
+    public function isGenreBooks(string $id): ?bool
+    {
+        $stmt = $this->database->connect()->prepare('SELECT * FROM "Books" WHERE genre_id = :id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        try {
+            $stmt->execute();
+            return ($stmt->rowCount() > 0) ? true : false;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }

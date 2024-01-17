@@ -33,5 +33,7 @@ Routing::post('getUserBook', 'UsersBookController');
 Routing::post('addUserBook', 'UsersBookController');
 Routing::post('removeUserBook', 'UsersBookController');
 Routing::post('removeBook', 'DashboardController');
+Routing::post('removeAuthor', 'DashboardController');
+Routing::post('removeGenre', 'DashboardController');
 
 Routing::run($path);

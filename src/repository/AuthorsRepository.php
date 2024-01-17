@@ -56,4 +56,30 @@ class AuthorsRepository extends Repository
 
         return ($result > 0);
     }
+
+    public function removeAuthor(string $id): ?bool
+    {
+        $stmt = $this->database->connect()->prepare('DELETE FROM "Authors" WHERE author_id = :id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        try {
+            $stmt->execute();
+            return ($stmt->rowCount() > 0) ? 200 : 204;
+        } catch (PDOException $e) {
+            return 500;
+        }
+    }
+
+    public function isAuthorBooks(string $id): ?bool
+    {
+        $stmt = $this->database->connect()->prepare('SELECT * FROM "Books" WHERE author_id = :id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        try {
+            $stmt->execute();
+            return ($stmt->rowCount() > 0) ? true : false;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }

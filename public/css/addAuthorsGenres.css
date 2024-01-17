@@ -17,9 +17,7 @@ body {
   
 main {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
     min-height: calc(100vh - 9em);
     background-color: white;
     margin-top: 9em;
@@ -28,16 +26,25 @@ main {
 }
 
 section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2em;
+    margin-bottom: 2em;
+}
+
+.manage-container {
     width: 100%;
     text-align: center;
 }
 
-section h1 {
+.manage-container h1 {
     font-size: 2em;
 }
 
 @media only screen and (max-width: 992px) {
-    main {
+    section {
         flex-direction: column;
     }
 }
