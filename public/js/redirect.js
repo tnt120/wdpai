@@ -7,6 +7,9 @@ function redirectHome() {
 }
 
 function redirectEdit(id) {
-    console.log('xd');
     window.location.href = `/edit?book=${id}`;
+}
+
+function redirectAuthorsGenres() {
+    window.location.href = '/addAuthorsGenres';
 }

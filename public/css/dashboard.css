@@ -74,7 +74,7 @@ table {
     justify-content: center;
     height: auto;
     margin-top: 2em;
-    margin-bottom: 2em;
+    margin-bottom: 4em;
     border-spacing: 0;
     width: 80%;
 }
@@ -112,6 +112,10 @@ tr:nth-child(odd) {
 
 tr:nth-child(odd) button {
     background-color: #F1EFEF;
+}
+
+.buttons {
+    margin-top: 2em;
 }
 
 @media only screen and (min-width: 2499px) {

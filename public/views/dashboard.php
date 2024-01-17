@@ -57,6 +57,10 @@
             </div>
             <button type="button" class="primary-button"><img src="/public/img/search.svg" alt="search"></button>
         </div>
+        <div class="buttons">
+            <button type="button" class="secondary-button" onclick="redirectAuthorsGenres()">Manage Authors &
+                Genres</button>
+        </div>
         <table class="content">
             <tr>
                 <th class="text">Title</th>

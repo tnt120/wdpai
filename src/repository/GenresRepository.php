@@ -35,6 +35,24 @@ class GenresRepository extends Repository
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return $result['genre_id'];
+        if (!empty($result)) {
+            return $result['genre_id'];
+        } else {
+            return 0;
+        }
+    }
+
+    public function addGenre(string $name): ?bool
+    {
+
+        $stmt = $this->database->connect()->prepare('INSERT INTO "Genres" (name) VALUES (?)');
+
+        $stmt->execute([
+            $name,
+        ]);
+
+        $result = $stmt->rowCount();
+
+        return ($result > 0);
     }
 }

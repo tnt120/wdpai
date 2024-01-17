@@ -35,6 +35,25 @@ class AuthorsRepository extends Repository
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return $result['author_id'];
+        if (!empty($result)) {
+            return $result['author_id'];
+        }
+
+        return 0;
+    }
+
+    public function addAuthor(string $name, string $surname): ?bool
+    {
+
+        $stmt = $this->database->connect()->prepare('INSERT INTO "Authors" (name, surname) VALUES (?, ?)');
+
+        $stmt->execute([
+            $name,
+            $surname
+        ]);
+
+        $result = $stmt->rowCount();
+
+        return ($result > 0);
     }
 }
