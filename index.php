@@ -14,11 +14,13 @@ Routing::get('myBookFinished', 'UsersBookController');
 Routing::get('myBookToRead', 'UsersBookController');
 Routing::get('myBookCurrentlyReading', 'UsersBookController');
 Routing::get('dashboard', 'DashboardController');
+Routing::get('edit', 'BookController');
 
 Routing::post("logout", "SecurityController");
 Routing::post('login', 'SecurityController');
 Routing::post('addBook', 'BookController');
 Routing::post('register', 'SecurityController');
+Routing::post('editBook', 'BookController');
 
 // API Endpoints
 

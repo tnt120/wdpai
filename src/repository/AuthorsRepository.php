@@ -24,4 +24,17 @@ class AuthorsRepository extends Repository
 
         return $result;
     }
+
+    public function getAuthorByName(string $author): ?int
+    {
+        $temp = "(name || ' ' || surname)";
+
+        $stmt = $this->database->connect()->prepare('SELECT author_id FROM "Authors" WHERE ' . $temp . ' = :author');
+        $stmt->bindParam(':author', $author, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['author_id'];
+    }
 }

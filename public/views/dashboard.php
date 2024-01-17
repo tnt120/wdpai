@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/public/css/dashboard.css">
     <script type="text/javascript" src="./public/js/searchDashboard.js" defer></script>
     <script type="text/javascript" src="./public/js/dashboardHandler.js"></script>
+    <script type="text/javascript" src="./public/js/redirect.js"></script>
     <title>Dashboard</title>
 </head>
 
@@ -72,7 +73,7 @@
                             <?php echo $book->getAuthor(); ?>
                         </td>
                         <td class="td-button">
-                            <button type="button" class="edit-button">
+                            <button type="button" class="edit-button" onclick="redirectEdit(<?= $book->getBookId(); ?>)">
                                 <img src="/public/img/edit.svg" alt="edit">
                             </button>
                         </td class="td-button">
@@ -100,7 +101,7 @@
             author
         </td>
         <td class="td-button">
-            <button type="button" class="edit-button">
+            <button type="button" class="edit-button" onclick="redirectEdit(<?= $book->getBookId(); ?>)">
                 <img src="/public/img/edit.svg" alt="edit">
             </button>
         </td class="td-button">

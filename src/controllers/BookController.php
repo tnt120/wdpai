@@ -5,6 +5,7 @@ require_once __DIR__ . '/../repository/BooksRepository.php';
 require_once __DIR__ . '/../repository/AuthorsRepository.php';
 require_once __DIR__ . '/../repository/GenresRepository.php';
 require_once __DIR__ . '/../repository/UserRepository.php';
+require_once __DIR__ . '/../repository/CoversRepository.php';
 require_once __DIR__ . '/../models/Book.php';
 
 class BookController extends AppController
@@ -18,6 +19,7 @@ class BookController extends AppController
     private $authorsRepository;
     private $genresRepository;
     private $userRepository;
+    private $coverRepository;
 
     public function __construct()
     {
@@ -26,6 +28,7 @@ class BookController extends AppController
         $this->booksRepository = new BooksRepository();
         $this->authorsRepository = new AuthorsRepository();
         $this->genresRepository = new GenresRepository();
+        $this->coverRepository = new CoversRepository();
     }
 
     public function home()
@@ -47,6 +50,26 @@ class BookController extends AppController
                 $authors = $this->authorsRepository->getAuthors();
                 $genres = $this->genresRepository->getGenres();
                 $this->render('addbookpage', ['authors' => $authors, 'genres' => $genres]);
+            } else {
+                header('Location: /home');
+            }
+        } else {
+            header('Location: /login');
+        }
+    }
+
+    public function edit()
+    {
+        if ($this->isAuthenticated() && isset($_GET['book'])) {
+            if ($this->userRepository->getUserRole($this->getSingedUserId()) === 'admin') {
+                try {
+                    $book = $this->booksRepository->getBook((int) $_GET['book']);
+                    $authors = $this->authorsRepository->getAuthors();
+                    $genres = $this->genresRepository->getGenres();
+                    $this->render('editBookPage', ['authors' => $authors, 'genres' => $genres, 'book' => $book]);
+                } catch (Exception $e) {
+                    $this->render('unexpectedError', ['error' => $e]);
+                }
             } else {
                 header('Location: /home');
             }
@@ -105,6 +128,56 @@ class BookController extends AppController
         $this->render('addBookPage', ['messages' => $this->messages]);
     }
 
+    public function editBook()
+    {
+        $author = $_POST['author'];
+        $genre = $_POST['genre'];
+        $description = $_POST['description'];
+        $coverUrl = $_FILES['file']['name'];
+        $book_id = $_POST['book_id'];
+
+        $book = $this->booksRepository->getBook($book_id);
+        $authors = $this->authorsRepository->getAuthors();
+        $genres = $this->genresRepository->getGenres();
+
+        if ($author === "none") {
+            $author = $this->authorsRepository->getAuthorByName($book->getAuthor());
+        }
+
+        if ($genre === "none") {
+            $genre = $this->genresRepository->getGenreByName($book->getGenre());
+        }
+
+        if (empty($description)) {
+            $description = $book->getDescription();
+        }
+
+        if (is_uploaded_file($_FILES['file']['tmp_name']) || $this->validate($_FILES['file'])) {
+            unlink(__DIR__ . '/../../public/covers/' . $book->getCoverImg());
+            move_uploaded_file(
+                $_FILES['file']['tmp_name'],
+                dirname(__DIR__) . self::UPLOAD_DIRECTIORY . $_FILES['file']['name']
+            );
+        } else {
+            $coverUrl = $book->getCoverImg();
+        }
+
+        $coverId = $this->coverRepository->getCoverId($book->getCoverImg());
+
+        try {
+            $result = $this->booksRepository->updateBook($book_id, $author, $genre, $description, $coverUrl, $coverId);
+
+            if ($result) {
+                $books = $this->booksRepository->getBooks();
+                $this->render('dashboard', ['books' => $books, 'authors' => $authors, 'genres' => $genres]);
+            } else {
+                return $this->render('editBookPage', ['messages' => ['Editing the book failed!'], 'authors' => $authors, 'genres' => $genres]);
+            }
+        } catch (PDOException $e) {
+            return $this->render('editBookPage', ['messages' => ['Editing the book failed!'], 'authors' => $authors, 'genres' => $genres]);
+        }
+    }
+
     public function search()
     {
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
@@ -138,4 +211,3 @@ class BookController extends AppController
     }
 }
 
-?>

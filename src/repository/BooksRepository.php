@@ -154,4 +154,44 @@ class BooksRepository extends Repository
             return 500;
         }
     }
+
+    public function updateBook(int $bookId, int $authorId, int $genreId, string $description, string $coverName, int $coverId): ?bool
+    {
+
+        try {
+            $connection = $this->database->connect();
+
+            $connection->beginTransaction();
+
+            $stmt = $connection->prepare('UPDATE "Books" SET genre_id = :genreId, author_id = :authorId, description = :description WHERE book_id = :bookId');
+            $stmt->bindParam(':genreId', $genreId, PDO::PARAM_INT);
+            $stmt->bindParam(':authorId', $authorId, PDO::PARAM_INT);
+            $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+            $stmt->bindParam(':bookId', $bookId, PDO::PARAM_INT);
+
+            $stmt->execute();
+            $bookUpdate = $stmt->rowCount();
+
+            $stmt = $connection->prepare('UPDATE "Images" SET url = :url WHERE image_id = :imageId');
+            $stmt->bindParam(':imageId', $coverId, PDO::PARAM_INT);
+            $stmt->bindParam(':url', $coverName, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            $imageUpdate = $stmt->rowCount();
+
+            if ($bookUpdate > 0 && $imageUpdate > 0) {
+                $connection->commit();
+                return true;
+            }
+
+            $connection->rollback();
+            return false;
+        } catch (PDOException $e) {
+            $connection->rollback();
+            throw $e;
+        }
+
+
+    }
 }

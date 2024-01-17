@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/addEditBookPage.css">
-    <script type="text/javascript" src="./public/js/addValidation.js" defer></script>
-    <title>Add book</title>
+    <link rel="stylesheet" href="/public/css/edit.css">
+    <title>Edit book</title>
 </head>
 
 <body>
@@ -21,7 +20,7 @@
                 <a href="/dashboard" class="nav-option">Dashboard</a>
             </li>
             <li>
-                <a href="" class="nav-option selected">Add book</a>
+                <a href="/add" class="nav-option">Add book</a>
             </li>
             <li>
                 <a href="/logout" class="nav-option">Logout</a>
@@ -32,8 +31,12 @@
         </div>
     </nav>
     <main>
-        <h1>Add book</h1>
-        <form action="addBook" method="POST" enctype="multipart/form-data">
+        <h1>Edit book:</br>
+            <?= $book->getTitle(); ?>
+        </h1>
+        <p>Complete only the fields you want to change for this book</p>
+        <form action="editBook" method="POST" enctype="multipart/form-data">
+            <input type="text" name="book_id" value="<?= $book->getBookId(); ?>" style="display:none">
             <div class="message">
                 <?php
                 if (isset($messages)) {
@@ -43,9 +46,8 @@
                 }
                 ?>
             </div>
-            <input name="title" type="text" placeholder="Title" required>
             <select name="author">
-                <option value="none">Author</option>
+                <option value="none">New Author</option>
                 <?php foreach ($authors as $author): ?>
                     <option value="<?php echo $author->getAuthorId() ?>">
                         <?php echo $author->getName() . ' ' . $author->getSurname() ?>
@@ -53,17 +55,16 @@
                 <?php endforeach; ?>
             </select>
             <select name="genre">
-                <option value="none">Genre</option>
+                <option value="none">New genre</option>
                 <?php foreach ($genres as $genre): ?>
                     <option value="<?php echo $genre->getGenreId() ?>">
                         <?php echo $genre->getName() ?>
                     </option>
                 <?php endforeach; ?>
             </select>
-            <textarea name="description" id="description" cols="30" rows="10" placeholder="Description"
-                required></textarea>
-            <input type="file" name="file" id="file" class="file-input" placeholder="Add cover" required>
-            <button type="submit" class="priority-button">ADD</button>
+            <textarea name="description" id="description" cols="30" rows="10" placeholder="New description"></textarea>
+            <input type="file" name="file" id="file" class="file-input" placeholder="Add cover">
+            <button type="submit" class="priority-button">EDIT</button>
         </form>
     </main>
     <footer>

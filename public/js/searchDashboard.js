@@ -43,6 +43,10 @@ function createBook(book) {
     removeButton.onclick = function () {
         removeBook(book.book_id, book.title, book.url);
     };
+    const editButton = clone.querySelector('.edit-button');
+    editButton.onclick = function () {
+        redirectEdit(book.book_id);
+    };
 
     tableContainer.appendChild(clone);
 }

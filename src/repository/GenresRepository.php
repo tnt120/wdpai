@@ -24,6 +24,17 @@ class GenresRepository extends Repository
 
         return $result;
     }
-}
 
-?>
+    public function getGenreByName(string $name): ?int
+    {
+
+        $stmt = $this->database->connect()->prepare('SELECT genre_id FROM "Genres" WHERE name = :name');
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['genre_id'];
+    }
+}

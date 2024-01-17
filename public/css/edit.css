@@ -1,0 +1,11 @@
+@import url('/public/css/addEditBookPage.css');
+
+section.editing-book {
+    width: 50%;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
+section.editing-book span {
+    font-weight: bold;
+}
