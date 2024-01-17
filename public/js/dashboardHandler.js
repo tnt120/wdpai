@@ -1,5 +1,4 @@
 async function removeBook(id, name, bookImg) {
-    console.log(id, name, bookImg);
     if (!confirm(`Are you sure you want to remove "${name}" book?`)) {
         return;
     }
