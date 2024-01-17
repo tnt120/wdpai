@@ -13,7 +13,7 @@ Routing::get('registration', 'DefaultController');
 Routing::get('myBookFinished', 'UsersBookController');
 Routing::get('myBookToRead', 'UsersBookController');
 Routing::get('myBookCurrentlyReading', 'UsersBookController');
-Routing::get('dashboard', 'DefaultController');
+Routing::get('dashboard', 'DashboardController');
 
 Routing::post("logout", "SecurityController");
 Routing::post('login', 'SecurityController');
