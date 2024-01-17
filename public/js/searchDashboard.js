@@ -40,14 +40,5 @@ function createBook(book) {
     const authorText = clone.querySelector('.content-item-author');
     authorText.innerHTML = `${book.name} ${book.surname}`;
 
-    // const image = clone.querySelector('img');
-    // image.src = `/public/covers/${book.url}`;
-    // const title = clone.querySelector('.content-item-title');
-    // title.innerHTML = book.title;
-    // const author = clone.querySelector('.content-item-author');
-    // author.innerHTML = `${book.name} ${book.surname}`;
-    // const rating = clone.querySelector('.content-item-rating');
-    // rating.innerHTML = `Rating: ${book.rating}`;
-
     tableContainer.appendChild(clone);
 }
