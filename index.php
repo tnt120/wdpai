@@ -27,6 +27,7 @@ Routing::post('getCover', 'CoverController');
 Routing::post('getUserBook', 'UsersBookController');
 Routing::post('addUserBook', 'UsersBookController');
 Routing::post('removeUserBook', 'UsersBookController');
+Routing::post('removeBook', 'DashboardController');
 
 Routing::run($path);
 

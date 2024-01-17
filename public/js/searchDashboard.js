@@ -39,6 +39,10 @@ function createBook(book) {
     titleText.innerHTML = book.title;
     const authorText = clone.querySelector('.content-item-author');
     authorText.innerHTML = `${book.name} ${book.surname}`;
+    const removeButton = clone.querySelector('.remove-button');
+    removeButton.onclick = function () {
+        removeBook(book.book_id, book.title, book.url);
+    };
 
     tableContainer.appendChild(clone);
 }

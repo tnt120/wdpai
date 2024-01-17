@@ -141,4 +141,17 @@ class BooksRepository extends Repository
         }
 
     }
+
+    public function removeBook(int $id): int
+    {
+        $stmt = $this->database->connect()->prepare('DELETE FROM "Books" WHERE book_id = :id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        try {
+            $stmt->execute();
+            return ($stmt->rowCount() > 0) ? 200 : 204;
+        } catch (PDOException $e) {
+            return 500;
+        }
+    }
 }

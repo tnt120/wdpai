@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/css/dashboard.css">
     <script type="text/javascript" src="./public/js/searchDashboard.js" defer></script>
+    <script type="text/javascript" src="./public/js/dashboardHandler.js"></script>
     <title>Dashboard</title>
 </head>
 
@@ -76,7 +77,8 @@
                             </button>
                         </td class="td-button">
                         <td>
-                            <button type="button" class="remove-button">
+                            <button type="button" class="remove-button"
+                                onclick="removeBook(<?= $book->getBookId(); ?>, '<?= $book->getTitle(); ?>', '<?= $book->getCoverImg(); ?>')">
                                 <img src="/public/img/delete-book.svg" alt="delete">
                             </button>
                         </td>
@@ -103,7 +105,8 @@
             </button>
         </td class="td-button">
         <td>
-            <button type="button" class="remove-button">
+            <button type="button" class="remove-button"
+                onclick="removeBook(<?= $book->getBookId(); ?>, '<?= $book->getTitle(); ?>', '<?= $book->getCoverImg(); ?>')">
                 <img src="/public/img/delete-book.svg" alt="delete">
             </button>
         </td>

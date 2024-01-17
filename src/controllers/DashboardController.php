@@ -37,4 +37,25 @@ class DashboardController extends AppController
             header('Location: /login');
         }
     }
+
+    public function removeBook()
+    {
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+        if ($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+
+            $result = $this->booksRepository->removeBook($decoded['bookId']);
+
+            if ($result === 200) {
+                unlink(__DIR__ . '/../../public/covers/' . $decoded['bookUrl']);
+            }
+
+            echo json_encode($result);
+        }
+    }
 }
