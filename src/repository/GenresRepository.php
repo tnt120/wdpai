@@ -45,15 +45,21 @@ class GenresRepository extends Repository
     public function addGenre(string $name): ?bool
     {
 
-        $stmt = $this->database->connect()->prepare('INSERT INTO "Genres" (name) VALUES (?)');
+        try {
 
-        $stmt->execute([
-            $name,
-        ]);
+            $stmt = $this->database->connect()->prepare('INSERT INTO "Genres" (name) VALUES (?)');
+    
+            $stmt->execute([
+                $name,
+            ]);
+    
+            $result = $stmt->rowCount();
+    
+            return ($result > 0);
+        } catch (PDOException $e) {
+            return false;
+        }
 
-        $result = $stmt->rowCount();
-
-        return ($result > 0);
     }
 
     public function removeGenre(string $id): ?bool

@@ -45,16 +45,21 @@ class AuthorsRepository extends Repository
     public function addAuthor(string $name, string $surname): ?bool
     {
 
-        $stmt = $this->database->connect()->prepare('INSERT INTO "Authors" (name, surname) VALUES (?, ?)');
+        try {
 
-        $stmt->execute([
-            $name,
-            $surname
-        ]);
-
-        $result = $stmt->rowCount();
-
-        return ($result > 0);
+            $stmt = $this->database->connect()->prepare('INSERT INTO "Authors" (name, surname) VALUES (?, ?)');
+    
+            $stmt->execute([
+                $name,
+                $surname
+            ]);
+    
+            $result = $stmt->rowCount();
+    
+            return ($result > 0);
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function removeAuthor(string $id): ?bool

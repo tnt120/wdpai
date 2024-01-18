@@ -130,40 +130,45 @@ class BookController extends AppController
 
     public function editBook()
     {
-        $author = $_POST['author'];
-        $genre = $_POST['genre'];
-        $description = $_POST['description'];
-        $coverUrl = $_FILES['file']['name'];
-        $book_id = $_POST['book_id'];
+        try {
+            $author = $_POST['author'];
+            $genre = $_POST['genre'];
+            $description = $_POST['description'];
+            $coverUrl = $_FILES['file']['name'];
+            $book_id = $_POST['book_id'];
 
-        $book = $this->booksRepository->getBook($book_id);
-        $authors = $this->authorsRepository->getAuthors();
-        $genres = $this->genresRepository->getGenres();
+                $book = $this->booksRepository->getBook($book_id);
+                $authors = $this->authorsRepository->getAuthors();
+                $genres = $this->genresRepository->getGenres();
 
-        if ($author === "none") {
-            $author = $this->authorsRepository->getAuthorByName($book->getAuthor());
+            
+
+            if ($author === "none") {
+                $author = $this->authorsRepository->getAuthorByName($book->getAuthor());
+            }
+
+            if ($genre === "none") {
+                $genre = $this->genresRepository->getGenreByName($book->getGenre());
+            }
+
+            if (empty($description)) {
+                $description = $book->getDescription();
+            }
+
+            if (is_uploaded_file($_FILES['file']['tmp_name']) || $this->validate($_FILES['file'])) {
+                unlink(__DIR__ . '/../../public/covers/' . $book->getCoverImg());
+                move_uploaded_file(
+                    $_FILES['file']['tmp_name'],
+                    dirname(__DIR__) . self::UPLOAD_DIRECTIORY . $_FILES['file']['name']
+                );
+            } else {
+                $coverUrl = $book->getCoverImg();
+            }
+
+            $coverId = $this->coverRepository->getCoverId($book->getCoverImg());
+        } catch (Exception $e) {
+            $this->render('unexpectedError', ['error' => $e]);
         }
-
-        if ($genre === "none") {
-            $genre = $this->genresRepository->getGenreByName($book->getGenre());
-        }
-
-        if (empty($description)) {
-            $description = $book->getDescription();
-        }
-
-        if (is_uploaded_file($_FILES['file']['tmp_name']) || $this->validate($_FILES['file'])) {
-            unlink(__DIR__ . '/../../public/covers/' . $book->getCoverImg());
-            move_uploaded_file(
-                $_FILES['file']['tmp_name'],
-                dirname(__DIR__) . self::UPLOAD_DIRECTIORY . $_FILES['file']['name']
-            );
-        } else {
-            $coverUrl = $book->getCoverImg();
-        }
-
-        $coverId = $this->coverRepository->getCoverId($book->getCoverImg());
-
         try {
             $result = $this->booksRepository->updateBook($book_id, $author, $genre, $description, $coverUrl, $coverId);
 
