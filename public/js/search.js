@@ -43,6 +43,11 @@ function createBook(book) {
     author.innerHTML = `${book.name} ${book.surname}`;
     const rating = clone.querySelector('.content-item-rating');
     rating.innerHTML = `Rating: ${book.rating}`;
+    // const searchBtn = clone.querySelector('.search-btn');
+    const searchBtn = clone.querySelector('.search-btn');
+    searchBtn.onclick = function () {
+        redirectDetails(book.book_id);
+    };
 
     bookContainer.appendChild(clone);
 }

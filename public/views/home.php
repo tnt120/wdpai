@@ -72,7 +72,7 @@
                         Rating:
                         <?php echo $book->getRating(); ?>
                     </p>
-                    <button type="button" class="secondary-button"
+                    <button type="button" class="secondary-button search-btn"
                         onclick="redirectDetails(<?= $book->getBookId() ?>)">Details</button>
                 </div>
             <?php endforeach; ?>
@@ -96,7 +96,7 @@
         <p class="content-item-rating">
             Rating: rating
         </p>
-        <button type="button" class="secondary-button"
+        <button type="button" class="secondary-button search-btn"
             onclick="redirectDetails(<?= $book->getBookId() ?>)">Details</button>
     </div>
 </template>
