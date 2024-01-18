@@ -12,7 +12,7 @@
  Target Server Version : 160001 (160001)
  File Encoding         : 65001
 
- Date: 18/01/2024 00:34:41
+ Date: 18/01/2024 01:17:02
 */
 
 
@@ -452,7 +452,6 @@ CREATE TABLE "public"."Sessions" (
 -- ----------------------------
 -- Records of Sessions
 -- ----------------------------
-INSERT INTO "public"."Sessions" VALUES ('e4cfbcd5b518e8eb4a9b94b0ac87af0d', 9, '2024-01-24');
 
 -- ----------------------------
 -- Table structure for Types
@@ -499,6 +498,10 @@ CACHE 1
 -- ----------------------------
 -- Records of UserBooks
 -- ----------------------------
+INSERT INTO "public"."UserBooks" OVERRIDING SYSTEM VALUE VALUES (23, 2, 10, 8, 0.0);
+INSERT INTO "public"."UserBooks" OVERRIDING SYSTEM VALUE VALUES (24, 1, 9, 8, 5.0);
+INSERT INTO "public"."UserBooks" OVERRIDING SYSTEM VALUE VALUES (25, 2, 9, 2, 0.0);
+INSERT INTO "public"."UserBooks" OVERRIDING SYSTEM VALUE VALUES (26, 2, 9, 1, 0.0);
 INSERT INTO "public"."UserBooks" OVERRIDING SYSTEM VALUE VALUES (8, 1, 10, 3, 3.0);
 INSERT INTO "public"."UserBooks" OVERRIDING SYSTEM VALUE VALUES (13, 3, 10, 2, 0.0);
 INSERT INTO "public"."UserBooks" OVERRIDING SYSTEM VALUE VALUES (14, 1, 10, 1, 4.0);
@@ -568,6 +571,32 @@ END;
 $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
+
+-- ----------------------------
+-- View structure for BooksInformation
+-- ----------------------------
+DROP VIEW IF EXISTS "public"."BooksInformation";
+CREATE VIEW "public"."BooksInformation" AS  SELECT b.title AS tytul,
+    (a.name::text || ' '::text) || a.surname::text AS autor,
+    g.name AS gatunek,
+    b.rating AS ocena,
+    b.description AS opis,
+    count(ub.book_id) AS wystapienia
+   FROM "Books" b
+     JOIN "Authors" a ON b.author_id = a.author_id
+     JOIN "Genres" g ON b.genre_id = g.genre_id
+     LEFT JOIN "UserBooks" ub ON b.book_id = ub.book_id
+  GROUP BY b.title, ((a.name::text || ' '::text) || a.surname::text), g.name, b.rating, b.description;
+
+-- ----------------------------
+-- View structure for TypesSummary
+-- ----------------------------
+DROP VIEW IF EXISTS "public"."TypesSummary";
+CREATE VIEW "public"."TypesSummary" AS  SELECT t.name AS typ,
+    count(ub.type_id) AS wystapienia
+   FROM "Types" t
+     LEFT JOIN "UserBooks" ub ON t.type_id = ub.type_id
+  GROUP BY t.name;
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -714,7 +743,7 @@ SELECT setval('"public"."UserBooks_id_seq1"', 1, false);
 -- ----------------------------
 ALTER SEQUENCE "public"."UserBooks_id_seq2"
 OWNED BY "public"."UserBooks"."id";
-SELECT setval('"public"."UserBooks_id_seq2"', 22, true);
+SELECT setval('"public"."UserBooks_id_seq2"', 26, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -841,7 +870,7 @@ ALTER TABLE "public"."Types" ADD CONSTRAINT "Types_pkey" PRIMARY KEY ("type_id")
 -- ----------------------------
 -- Auto increment value for UserBooks
 -- ----------------------------
-SELECT setval('"public"."UserBooks_id_seq2"', 22, true);
+SELECT setval('"public"."UserBooks_id_seq2"', 26, true);
 
 -- ----------------------------
 -- Primary Key structure for table UserBooks
